@@ -1,3 +1,5 @@
-﻿  main.cpp
-C:\MoeMyintZaw\VistualStudio2022Community\GameDev\RPG-Game\RPG-Game\main.cpp(292,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  RPG-Game.vcxproj -> C:\MoeMyintZaw\VistualStudio2022Community\GameDev\RPG-Game\x64\Debug\RPG-Game.exe
+﻿  Animation.cpp
+  main.cpp
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\main.cpp(292,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  RPG-Game.vcxproj -> C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\x64\Debug\RPG-Game.exe
