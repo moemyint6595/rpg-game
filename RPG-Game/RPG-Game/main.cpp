@@ -196,6 +196,7 @@
 //}
 
 #include <math.h>
+#include "Character.h"
 
 sf::Vector2f NormalizeVection(sf::Vector2f vector) {
 
@@ -219,35 +220,14 @@ int main()
 	//------------------------------------------ Initialize ----------------------- 
 
 	//------------------------------------------ Load ----------------------- 
-
 	std::vector<sf::RectangleShape> bullets;
-	//sf::RectangleShape bullet(sf::Vector2f(10.0f,10.0f));
 	float bullet_speed = 2.0f;
-
-
 	//------------------------------------------ Player ----------------------- 
-	sf::Texture playerTexture;
-	sf::Sprite playerSprite;
+	Character player;
+	player.Load(0,2,64, sf::Vector2f(800.0f, 800.0f));
 
-	sf::Texture skeletonTexture;
-	sf::Sprite skeletonSprite;
-
-	if (playerTexture.loadFromFile("assets/Player/Textures/spritesheet.png"))
-	{
-		playerSprite.setTexture(playerTexture);
-		skeletonSprite.setTexture(playerTexture);
-
-		int XIndex = 0; int YIndex = 2; int IR = 64;
-		playerSprite.setTextureRect(sf::IntRect(XIndex * IR, YIndex * IR, IR, IR));
-		playerSprite.scale(sf::Vector2f(2, 2));
-		playerSprite.setPosition(sf::Vector2f(1650.0f, 800.0f));
-		//bullet.setPosition(InitialPosition);
-
-		int SXIndex = 0; int SYIndex = 0; int SIR = 64;
-		skeletonSprite.setTextureRect(sf::IntRect(SXIndex * IR, SYIndex * SIR, SIR, SIR));
-		skeletonSprite.scale(sf::Vector2f(2, 2));
-		skeletonSprite.setPosition(sf::Vector2f(100.0f, 500.0f));
-	}
+	Character skeleton;
+	skeleton.Load(0, 0, 64, sf::Vector2f(100.0f, 100.0f));
 	//------------------------------------------ Player ----------------------- 
 
 	//------------------------------------------ Load ----------------------- 
@@ -265,22 +245,7 @@ int main()
 			}
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		{
-			playerSprite.move(-0.3f, 0.0f);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		{
-			playerSprite.move(0.3f, 0.0f);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		{
-			playerSprite.move(0.0f, -0.3f);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		{
-			playerSprite.move(0.0f, 0.3f);
-		}
+		player.Update();
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
@@ -290,17 +255,14 @@ int main()
 
 			//------------------------------ Set bullet position -------------------
 			int i = bullets.size() - 1;
-			bullets[i].setPosition(playerSprite.getPosition());
+			bullets[i].setPosition(player.sprite.getPosition());
 			//------------------------------ Set bullet position -------------------
-
-			
-
 		}
 
 		for (size_t i = 0; i < bullets.size(); i++)
 		{
 			//------------------------------ Calculate bullet_direction of bullet -------------------
-			sf::Vector2f bullet_direction = skeletonSprite.getPosition() - bullets[i].getPosition();
+			sf::Vector2f bullet_direction = skeleton.sprite.getPosition() - bullets[i].getPosition();
 			bullet_direction = NormalizeVection(bullet_direction);
 			//------------------------------ Calculate bullet_direction of bullet -------------------
 
@@ -314,18 +276,15 @@ int main()
 		//------------------------------------------Draw-----------------------
 
 		window.clear(sf::Color::Black);
-
 		//We draw our curret render here // aka backbuffer
 		//Draw
-		window.draw(playerSprite);
-		window.draw(skeletonSprite);
+		window.draw(player.sprite);
+		window.draw(skeleton.sprite);
 		for (size_t i = 0; i < bullets.size(); i++)
 		{
 			window.draw(bullets[i]);
 		}
-		//window.draw(bullet);
 		window.display(); //Copying data from Back Buffer and display on the screen => game loop start
-
 		//------------------------------------------Draw----------------------- 
 	}
 
