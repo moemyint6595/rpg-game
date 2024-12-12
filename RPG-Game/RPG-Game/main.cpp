@@ -224,9 +224,12 @@ int main()
 	float bullet_speed = 2.0f;
 	//------------------------------------------ Player ----------------------- 
 	Character player;
-	player.Load(0,2,64, sf::Vector2f(800.0f, 800.0f));
-
 	Character skeleton;
+
+	player.Initialize();
+	skeleton.Initialize();
+
+	player.Load(0, 2, 64, sf::Vector2f(800.0f, 800.0f));
 	skeleton.Load(0, 0, 64, sf::Vector2f(100.0f, 100.0f));
 	//------------------------------------------ Player ----------------------- 
 
@@ -278,8 +281,10 @@ int main()
 		window.clear(sf::Color::Black);
 		//We draw our curret render here // aka backbuffer
 		//Draw
-		window.draw(player.sprite);
-		window.draw(skeleton.sprite);
+
+		player.Draw(window);
+		skeleton.Draw(window);
+
 		for (size_t i = 0; i < bullets.size(); i++)
 		{
 			window.draw(bullets[i]);

@@ -36,6 +36,7 @@ void Character::Update()
 	}
 }
 
-void Character::Draw()
+void Character::Draw(sf::RenderWindow& window)
 {
+	window.draw(sprite);
 }

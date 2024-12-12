@@ -14,5 +14,5 @@ public:
 	void Initialize();
 	void Load(int, int, int, sf::Vector2f);
 	void Update();
-	void Draw();
+	void Draw(sf::RenderWindow& window);
 };
