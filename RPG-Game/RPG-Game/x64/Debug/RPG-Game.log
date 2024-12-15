@@ -1,5 +1,18 @@
-﻿  Character.cpp
+﻿  Animation.cpp
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(11,38): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(11,38): warning C4244:         with
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(11,38): warning C4244:         [
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(11,38): warning C4244:             T=int
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(11,38): warning C4244:         ]
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(12,39): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(12,39): warning C4244:         with
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(12,39): warning C4244:         [
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(12,39): warning C4244:             T=int
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\Animation.cpp(12,39): warning C4244:         ]
+  Character.cpp
   main.cpp
-C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\main.cpp(260,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\main.cpp(329,64): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\main.cpp(330,68): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\RPG-Game\main.cpp(364,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
   RPG-Game.vcxproj -> C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\x64\Debug\RPG-Game.exe

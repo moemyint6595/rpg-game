@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <math.h>
+#include "Character.h"
+
 //int main()
 //{
 //    sf::RenderWindow window(sf::VideoMode(800,800), "RPG Game");  //accept 2 argument ,Video Mode , window title    
@@ -195,9 +198,6 @@
 //    return 0;
 //}
 
-#include <math.h>
-#include "Character.h"
-
 sf::Vector2f NormalizeVection(sf::Vector2f vector) {
 
 	float m = std::sqrt(vector.x * vector.x + vector.y * vector.y);
@@ -211,6 +211,99 @@ sf::Vector2f NormalizeVection(sf::Vector2f vector) {
 
 }
 
+//SHooting
+
+//int main()
+//{
+//	//------------------------------------------ Initialize ----------------------- 
+//	sf::ContextSettings settings;
+//	settings.antialiasingLevel = 8;
+//	sf::RenderWindow window(sf::VideoMode(1920, 1080), "RPG Game");  //accept 2 argument ,Video Mode , window title    
+//	//------------------------------------------ Initialize ----------------------- 
+//
+//	//------------------------------------------ Load ----------------------- 
+//	std::vector<sf::RectangleShape> bullets;
+//	float bullet_speed = 2.0f;
+//	//------------------------------------------ Player ----------------------- 
+//	Character player;
+//	Character skeleton;
+//
+//	player.Initialize();
+//	skeleton.Initialize();
+//
+//	player.Load(0, 2, 64, sf::Vector2f(800.0f, 800.0f));
+//	skeleton.Load(0, 0, 64, sf::Vector2f(100.0f, 100.0f));
+//	//------------------------------------------ Player ----------------------- 
+//
+//	//------------------------------------------ Load ----------------------- 
+//
+//	while (window.isOpen())  //Game loop
+//	{
+//		//------------------------------------------ Update ----------------------- 
+//
+//		sf::Event event;
+//		while (window.pollEvent(event))  //Event loop   //store event in "event" and execute 
+//		{
+//			if (event.type == sf::Event::Closed)
+//			{
+//				window.close();
+//			}
+//		}
+//
+//		player.Update();
+//
+//		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+//		{
+//			//------------------------------ Load a bullet -------------------
+//			bullets.push_back(sf::RectangleShape(sf::Vector2f(10.0f, 10.0f)));
+//			//------------------------------ Load a bullet -------------------
+//
+//			//------------------------------ Set bullet position -------------------
+//			int i = bullets.size() - 1;
+//			bullets[i].setPosition(player.sprite.getPosition());
+//			//------------------------------ Set bullet position -------------------
+//		}
+//
+//		for (size_t i = 0; i < bullets.size(); i++)
+//		{
+//			//------------------------------ Calculate bullet_direction of bullet -------------------
+//			sf::Vector2f bullet_direction = skeleton.sprite.getPosition() - bullets[i].getPosition();
+//			bullet_direction = NormalizeVection(bullet_direction);
+//			//------------------------------ Calculate bullet_direction of bullet -------------------
+//
+//			//------------------------------ Fire bullet to a direction with speed -------------------
+//			bullets[i].setPosition(bullets[i].getPosition() + bullet_direction * bullet_speed);
+//			//------------------------------ Fire bullet to a direction with speed -------------------
+//		}
+//
+//		//------------------------------------------  Update ----------------------- 
+//		 
+//		//------------------------------------------Draw-----------------------
+//
+//		window.clear(sf::Color::Black);
+//		//We draw our curret render here // aka backbuffer
+//		//Draw
+//
+//		player.Draw(window);
+//		skeleton.Draw(window);
+//
+//		for (size_t i = 0; i < bullets.size(); i++)
+//		{
+//			window.draw(bullets[i]);
+//		}
+//		window.display(); //Copying data from Back Buffer and display on the screen => game loop start
+//		//------------------------------------------Draw----------------------- 
+//	}
+//
+//	return 0;
+//}
+
+
+
+//=============================================ANIMATION=============================================
+
+#include "Animation.h"
+
 int main()
 {
 	//------------------------------------------ Initialize ----------------------- 
@@ -223,20 +316,31 @@ int main()
 	std::vector<sf::RectangleShape> bullets;
 	float bullet_speed = 2.0f;
 	//------------------------------------------ Player ----------------------- 
-	Character player;
-	Character skeleton;
+	AnimationCharacter player;
+	AnimationCharacter skeleton;
 
 	player.Initialize();
 	skeleton.Initialize();
 
-	player.Load(0, 2, 64, sf::Vector2f(800.0f, 800.0f));
-	skeleton.Load(0, 0, 64, sf::Vector2f(100.0f, 100.0f));
+	player.Load(0, 2, 64,sf::Vector2f(800.0f, 800.0f), sf::Vector2f(2.0f,2.0f));
+	skeleton.Load(0, 0, 64,sf::Vector2f(100.0f, 100.0f), sf::Vector2f(2.0f, 2.0f));
+
+	//Animation
+	Animation playerAnimation(&player.texture, sf::Vector2u(9,4), 0.3);
+	Animation skeletonAnimation(&skeleton.texture, sf::Vector2u(9,4), 0.3);
+	
+	float deltaTime = 0.0f;
+	sf::Clock clock;
+
 	//------------------------------------------ Player ----------------------- 
 
 	//------------------------------------------ Load ----------------------- 
 
 	while (window.isOpen())  //Game loop
 	{
+
+		deltaTime = clock.restart().asSeconds();
+
 		//------------------------------------------ Update ----------------------- 
 
 		sf::Event event;
@@ -275,12 +379,20 @@ int main()
 		}
 
 		//------------------------------------------  Update ----------------------- 
-		 
+
 		//------------------------------------------Draw-----------------------
 
 		window.clear(sf::Color::Black);
 		//We draw our curret render here // aka backbuffer
 		//Draw
+
+		//----------------Animation-----------------
+		playerAnimation.Update(1, deltaTime);
+		player.sprite.setTextureRect(playerAnimation.uvRect);
+
+		skeletonAnimation.Update(3, deltaTime);
+		skeleton.sprite.setTextureRect(skeletonAnimation.uvRect);
+		//------------------Animation--------------------
 
 		player.Draw(window);
 		skeleton.Draw(window);
@@ -296,3 +408,4 @@ int main()
 	return 0;
 }
 
+//=============================================ANIMATION=============================================
