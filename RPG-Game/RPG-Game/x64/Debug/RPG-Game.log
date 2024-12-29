@@ -1,2 +1,21 @@
-﻿  main.cpp
-  RPG-Game.vcxproj -> C:\MoeMyintZaw\GitHubDesktop\rpg-game\RPG-Game\x64\Debug\RPG-Game.exe
+﻿  Character.cpp
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:         with
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:         [
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:             T=int
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:         ]
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:         and
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:         [
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:             T=float
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,43): warning C4244:         ]
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:         with
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:         [
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:             T=int
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:         ]
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:         and
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:         [
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:             T=float
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(27,35): warning C4244:         ]
+C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\RPG-Game\Character.cpp(63,10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  RPG-Game.vcxproj -> C:\MoeMyintZaw\GitHubDesktop\MyGame\rpg-game\RPG-Game\x64\Debug\RPG-Game.exe

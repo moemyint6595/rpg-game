@@ -9,6 +9,7 @@ private:
 
 	std::vector<sf::RectangleShape> bullets;
 	float bullet_speed = 2.0f;
+	float playerSpeed = 2.0f;
 
 	bool isShooter;
 
@@ -25,7 +26,7 @@ public:
 public:
 	void Initialize(bool, sf::Vector2i, sf::Vector2i, sf::Vector2f, sf::Vector2f);
 	void Load();
-	void Update(sf::Vector2f);
+	void Update(sf::Vector2f, float);
 	void Draw(sf::RenderWindow& window);
 };
 

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <math.h>
 #include "Character.h"
+#include "Math.h"
 
 //int main()
 //{
@@ -303,68 +304,6 @@
 
 
 //===========================================AABB Collision========================================
-sf::Vector2f NormalizeVection(sf::Vector2f vector) {
-
-	float m = std::sqrt(vector.x * vector.x + vector.y * vector.y);
-
-	sf::Vector2f NormalizedVector;
-
-	NormalizedVector.x = vector.x / m;
-	NormalizedVector.y = vector.y / m;
-
-	return NormalizedVector;
-
-}
-int main()
-{
-	//------------------------------------------ Initialize ----------------------- 
-	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "RPG Game");
-	//------------------------------------------ Initialize ----------------------- 
-
-	//------------------------------------------ Load ----------------------- 
-	Character player;
-	Character skeleton;
-
-	player.Initialize(true, sf::Vector2i(64,64), sf::Vector2i(0,2), sf::Vector2f(800.0f, 800.0f), sf::Vector2f(1.8f, 1.8f));
-	skeleton.Initialize(false, sf::Vector2i(64, 64), sf::Vector2i(0, 0), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(1.8f, 1.8f));
-
-	player.Load();
-	skeleton.Load();
-	//------------------------------------------ Load ----------------------- 
-
-	while (window.isOpen())
-	{
-		//------------------------------------------ Update ----------------------- 
-		sf::Event event;
-		while (window.pollEvent(event))  //Event loop   //store event in "event" and execute 
-		{
-			if (event.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-		}
-
-		player.Update(skeleton.sprite.getPosition());
-		//------------------------------------------  Update ----------------------- 
-		 
-		//------------------------------------------Draw-----------------------
-		window.clear(sf::Color::Black);
-		player.Draw(window);
-		skeleton.Draw(window);
-		window.display();
-		//------------------------------------------Draw----------------------- 
-	}
-	return 0;
-}
-//===========================================AABB Collision========================================
-
-
-//=============================================ANIMATION=============================================
-
-//#include "Animation.h"
-// 
 //sf::Vector2f NormalizeVection(sf::Vector2f vector) {
 //
 //	float m = std::sqrt(vector.x * vector.x + vector.y * vector.y);
@@ -377,6 +316,56 @@ int main()
 //	return NormalizedVector;
 //
 //}
+//int main()
+//{
+//	//------------------------------------------ Initialize ----------------------- 
+//	sf::ContextSettings settings;
+//	settings.antialiasingLevel = 8;
+//	sf::RenderWindow window(sf::VideoMode(1920, 1080), "RPG Game");
+//	//------------------------------------------ Initialize ----------------------- 
+//
+//	//------------------------------------------ Load ----------------------- 
+//	Character player;
+//	Character skeleton;
+//
+//	player.Initialize(true, sf::Vector2i(64,64), sf::Vector2i(0,2), sf::Vector2f(800.0f, 800.0f), sf::Vector2f(1.8f, 1.8f));
+//	skeleton.Initialize(false, sf::Vector2i(64, 64), sf::Vector2i(0, 0), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(1.8f, 1.8f));
+//
+//	player.Load();
+//	skeleton.Load();
+//	//------------------------------------------ Load ----------------------- 
+//
+//	while (window.isOpen())
+//	{
+//		//------------------------------------------ Update ----------------------- 
+//		sf::Event event;
+//		while (window.pollEvent(event))  //Event loop   //store event in "event" and execute 
+//		{
+//			if (event.type == sf::Event::Closed)
+//			{
+//				window.close();
+//			}
+//		}
+//
+//		player.Update(skeleton.sprite.getPosition());
+//		//------------------------------------------  Update ----------------------- 
+//		 
+//		//------------------------------------------Draw-----------------------
+//		window.clear(sf::Color::Black);
+//		player.Draw(window);
+//		skeleton.Draw(window);
+//		window.display();
+//		//------------------------------------------Draw----------------------- 
+//	}
+//	return 0;
+//}
+//===========================================AABB Collision========================================
+
+
+//=============================================ANIMATION=============================================
+
+//#include "Animation.h"
+
 //
 //int main()
 //{
@@ -414,7 +403,7 @@ int main()
 //	{
 //
 //		deltaTime = clock.restart().asSeconds();
-//
+//		//std::cout << deltaTime << std::endl;
 //		//------------------------------------------ Update ----------------------- 
 //
 //		sf::Event event;
@@ -483,3 +472,83 @@ int main()
 //}
 
 //=============================================ANIMATION=============================================
+
+
+
+//=========================================== DeltaTIme  ========================================
+
+int main()
+{
+	//------------------------------------------ Initialize ----------------------- 
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 8;
+	sf::RenderWindow window(sf::VideoMode(1000, 800), "RPG Game");  //accept 2 argument ,Video Mode , window title 
+	//window.setVerticalSyncEnabled(true);
+	window.setFramerateLimit(120);
+	//------------------------------------------ Initialize ----------------------- 
+
+	//------------------------------------------ Load ----------------------- 
+	//------------------------------------------ Player ----------------------- 
+	Character player;
+	Character skeleton;
+
+	player.Initialize(true, sf::Vector2i(64, 64), sf::Vector2i(0, 2), sf::Vector2f(400.0f, 400.0f), sf::Vector2f(1.8f, 1.8f));
+	skeleton.Initialize(false, sf::Vector2i(64, 64), sf::Vector2i(0, 0), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(1.8f, 1.8f));
+
+	player.Load();
+	skeleton.Load();
+	//------------------------------------------ Player ----------------------- 
+
+	sf::Text FPSText;
+	sf::Font font;
+
+	if (font.loadFromFile("assets/Font/arial.ttf")) 
+	{
+		FPSText.setFont(font);
+		//FPSText.setColor(sf::Color::Green);
+	}
+
+	//------------------------------------------ Load ----------------------- 
+
+	int deltaTime = 0.0f;
+	sf::Clock clock;
+
+	while (window.isOpen())  //Game loop
+	{
+
+		deltaTime = clock.restart().asMilliseconds();
+		std::string framString = std::to_string((int)(1000.0f / deltaTime)) + " FPS";
+		FPSText.setString(framString);
+		//std::cout << deltaTime << std::endl;
+
+		//------------------------------------------ Update ----------------------- 
+
+		sf::Event event;
+		while (window.pollEvent(event))  //Event loop   //store event in "event" and execute 
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+		}
+
+		player.Update(skeleton.sprite.getPosition(), deltaTime);
+
+		//------------------------------------------  Update ----------------------- 
+		 
+		//------------------------------------------Draw-----------------------
+
+		window.clear(sf::Color::Black);
+		//We draw our curret render here // aka backbuffer
+		//Draw
+
+		player.Draw(window);
+		skeleton.Draw(window);
+		window.draw(FPSText);
+		window.display(); //Copying data from Back Buffer and display on the screen => game loop start
+		//------------------------------------------Draw----------------------- 
+	}
+
+	return 0;
+}
+//============================================ DeltaTIme  ========================================

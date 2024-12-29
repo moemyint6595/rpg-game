@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "Math.h"
+#include "iostream"
 
 void Character::Initialize(bool isShooter, sf::Vector2i size, sf::Vector2i imageCor , sf::Vector2f postion, sf::Vector2f scale)
 {
@@ -29,23 +30,23 @@ void Character::Load()
 	}
 }
 
-void Character::Update(sf::Vector2f enemyPosition)
+void Character::Update(sf::Vector2f enemyPosition, float deltaTime)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		sprite.move(-0.5f, 0.0f);
+		sprite.setPosition(sprite.getPosition() + sf::Vector2f(-0.5f, 0.0f) * playerSpeed * deltaTime);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		sprite.move(0.5f, 0.0f);
+		sprite.setPosition(sprite.getPosition() + sf::Vector2f(0.5f, 0.0f) * playerSpeed * deltaTime);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		sprite.move(0.0f, -0.5f);
+		sprite.setPosition(sprite.getPosition() + sf::Vector2f(0.0f, -0.5f) * playerSpeed * deltaTime);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		sprite.move(0.0f, 0.5f);
+		sprite.setPosition(sprite.getPosition() + sf::Vector2f(0.0f, 0.5f) * playerSpeed * deltaTime);
 	}
 
 	hitbox.setPosition(sprite.getPosition());
@@ -64,16 +65,28 @@ void Character::Update(sf::Vector2f enemyPosition)
 			//------------------------------ Set bullet position -------------------
 		}
 
-		for (size_t i = 0; i < bullets.size(); i++)
+		if (bullets.size() > 0) 
 		{
-			//------------------------------ Calculate bullet_direction of bullet -------------------
-			sf::Vector2f bullet_direction = enemyPosition - bullets[i].getPosition();
-			bullet_direction = Math::NormalizeVection(bullet_direction);
-			//------------------------------ Calculate bullet_direction of bullet -------------------
+			for (size_t i = 0; i < bullets.size(); i++)
+			{
+				//------------------------------ Calculate bullet_direction of bullet -------------------
+				sf::Vector2f bullet_direction = enemyPosition - bullets[i].getPosition();
+				bullet_direction = Math::NormalizeVection(bullet_direction);
+				//------------------------------ Calculate bullet_direction of bullet -------------------
 
-			//------------------------------ Fire bullet to a direction with speed -------------------
-			bullets[i].setPosition(bullets[i].getPosition() + bullet_direction * bullet_speed);
-			//------------------------------ Fire bullet to a direction with speed -------------------
+				//------------------------------ Fire bullet to a direction with speed -------------------
+				bullets[i].setPosition(bullets[i].getPosition() + bullet_direction * bullet_speed * deltaTime);
+				//------------------------------ Fire bullet to a direction with speed -------------------
+
+				sf::Vector2f bulletPosition = bullets[i].getPosition();
+
+				if (enemyPosition.x + 64 > bulletPosition.x && bulletPosition.x + 10 > enemyPosition.x &&
+					enemyPosition.y + 64 > bulletPosition.y && bulletPosition.y + 10 > enemyPosition.y)
+				{
+					bullets.pop_back();
+				};
+
+			}
 		}
 	}
 }
@@ -84,9 +97,12 @@ void Character::Draw(sf::RenderWindow& window)
 	window.draw(hitbox);
 	if (isShooter) 
 	{
-		for (size_t i = 0; i < bullets.size(); i++)
+		if (bullets.size() > 0)
 		{
-			window.draw(bullets[i]);
+			for (size_t i = 0; i < bullets.size(); i++)
+			{
+				window.draw(bullets[i]);
+			}
 		}
 	}
 }
